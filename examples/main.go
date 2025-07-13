@@ -6,7 +6,14 @@ import (
 
 func main() {
 	// Create a new server instance with the specified address
-	srv := statix.NewServer(":8080")
+	srv, err := statix.NewServer(
+		statix.WithPort(8080),
+		statix.WithStaticDir("./html"),
+	)
+
+	if err != nil {
+		panic(err) // Handle error appropriately
+	}
 
 	// Start the server
 	if err := srv.Start(); err != nil {
